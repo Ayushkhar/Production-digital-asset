@@ -1,0 +1,26 @@
+# Large media files (exceed GitHub's 100MB limit)
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.tar.xz
+*.tar.gz
+*.zip
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# FAISS index files (can be regenerated)
+*.index
+*.faiss
+
+# Keyframes directory (generated output)
+keyframes/
+
+# Environment
+.env
+venv/
+.venv/
