@@ -1,13 +1,28 @@
+import warnings
+import logging
+import os
+
+# Suppress all warnings before any library imports
+warnings.filterwarnings("ignore")
+logging.getLogger("transformers").setLevel(logging.ERROR)
+logging.getLogger("huggingface_hub").setLevel(logging.ERROR)
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+
 from transformers import CLIPProcessor, CLIPModel
 from PIL import Image          
 import torch
-import os
 import numpy as np
 
 device = "cuda" if torch.cuda.is_available() else "cpu"  
 
-model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
-processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+model = CLIPModel.from_pretrained(
+    "openai/clip-vit-base-patch32",
+    ignore_mismatched_sizes=True
+).to(device)
+processor = CLIPProcessor.from_pretrained(
+    "openai/clip-vit-base-patch32",
+    use_fast=True
+)
 
 def get_embedding(image_path):
     image = Image.open(image_path).convert("RGB")
