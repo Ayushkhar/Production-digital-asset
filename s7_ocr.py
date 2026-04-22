@@ -26,7 +26,6 @@ def extract_text(image_path):
         return ""
     return text.lower()
 
-
 matches = 0
 total = 0
 
